@@ -7,7 +7,7 @@ import { Component, output } from '@angular/core';
   templateUrl: './nav-bar.html',
 })
 export class NavBar {
-  buscar = output<String>();
+  buscar = output<string>();
 
 onBuscar(event: Event): void {
   // Leo el texto que hay escrito en el input

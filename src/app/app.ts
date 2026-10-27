@@ -2,9 +2,10 @@ import { Component, computed, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Pizza } from './card-pizza/pizza';
 import { CardPizza } from './card-pizza/card-pizza';
+import { NavBar } from './nav-bar/nav-bar';
 
 @Component({
-  imports: [RouterOutlet, CardPizza],
+  imports: [RouterOutlet, CardPizza, NavBar],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
@@ -72,7 +73,7 @@ export class App {
 ];
 
   textoBusqueda = signal('');
-   onBuscar(texto: string): void {
+   guardarBusqueda(texto: string): void {
     this.textoBusqueda.set(texto);
   }
   pizzasFiltradas = computed(() => {
