@@ -1,0 +1,14 @@
+<div class="card h-100 w-100">
+  <img [src]="pizza().imagen" class="card-img-top imagen-pizza" [alt]="pizza().nombre">
+  <div class="card-body">
+    <h5 class="card-title">{{ pizza().nombre }}</h5>
+    <p class="card-text">
+     <span class="badge text-bg-danger">{{ pizza().precio }} €</span>   
+    </p>
+    <ul class="list-unstyled">
+      @for (ing of pizza().ingredientes; track ing) {
+        <li>{{ ing }}</li>
+      }
+    </ul>
+  </div>
+</div>
