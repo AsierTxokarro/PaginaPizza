@@ -16,9 +16,10 @@
         </li>
 
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search">
-        <button class="btn btn-outline-primary" type="submit">Buscar</button>
+      <form class="d-flex" role="search" (submit)="$event.preventDefault()">
+            <input class="form-control me-2" type="search" placeholder="Buscar por ingrediente..."
+            aria-label="Search" (input)="onBuscar($event)">
+            <button class="btn btn-outline-primary" type="submit">Buscar</button>
       </form>
     </div>
   </div>

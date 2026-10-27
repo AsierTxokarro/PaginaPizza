@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Pizza } from './card-pizza/pizza';
 import { CardPizza } from './card-pizza/card-pizza';
@@ -71,5 +71,24 @@ export class App {
   }
 ];
 
+  textoBusqueda = signal('');
+   onBuscar(texto: string): void {
+    this.textoBusqueda.set(texto);
+  }
+  pizzasFiltradas = computed(() => {
+  // Texto del buscador, en minúsculas y sin espacios sobrantes
+  const texto = this.textoBusqueda().toLowerCase().trim();
 
+  // Si no hay texto, muestro todas las pizzas
+  if (!texto) {
+    return this.listaPizzas;
+  }
+
+  // Me quedo solo con las pizzas que tengan algún ingrediente que contenga el texto
+  return this.listaPizzas.filter(pizza =>
+    pizza.ingredientes.some(ingrediente =>
+      ingrediente.toLowerCase().includes(texto)
+    )
+  );
+});
 }
