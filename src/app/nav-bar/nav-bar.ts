@@ -7,14 +7,12 @@ import { Component, output } from '@angular/core';
   templateUrl: './nav-bar.html',
 })
 export class NavBar {
-  buscar = output<string>();
+  // 1. Declaro el output (el "timbre")
+buscar = output<string>();
 
+// 2. Método que lee el input y dispara
 onBuscar(event: Event): void {
-  // Leo el texto que hay escrito en el input
-  const texto = (event.target as HTMLInputElement).value;
-
-  // Se lo envío al componente padre (App)
-  this.buscar.emit(texto);
-
+  const texto = (event.target as HTMLInputElement).value; // leer
+  this.buscar.emit(texto);                                // disparar
 }
 }

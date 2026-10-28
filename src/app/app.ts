@@ -3,9 +3,10 @@ import { RouterOutlet } from '@angular/router';
 import { Pizza } from './card-pizza/pizza';
 import { CardPizza } from './card-pizza/card-pizza';
 import { NavBar } from './nav-bar/nav-bar';
+import { Pedido } from './pedido/pedido';
 
 @Component({
-  imports: [RouterOutlet, CardPizza, NavBar],
+  imports: [RouterOutlet, CardPizza, NavBar, Pedido],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
@@ -92,4 +93,8 @@ export class App {
     )
   );
 });
+ cantidadPizzas = signal(0);
+   guardarCantidad(numero: number): void {
+    this.cantidadPizzas.update(total => total + numero);
+  }
 }

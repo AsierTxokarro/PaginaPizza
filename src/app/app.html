@@ -6,7 +6,7 @@
     
    @for (pizza of pizzasFiltradas(); track pizza.id) {
         <div class="col-12 col-md-6 col-lg-3">
-        <app-card-pizza [pizza]="pizza" />
+        <app-card-pizza [pizza]="pizza" (anadir)="guardarCantidad($event)"/>
       </div>
  
 } @empty {
@@ -15,7 +15,9 @@
 
   </div>
 </div>
-
+<div>
+  <app-pedido [acumulado] = "cantidadPizzas()"></app-pedido>
+</div>
 
 <div class="container mt-4 bg-light p-4 rounded shadow-sm">
   <div class="row">
