@@ -1,0 +1,72 @@
+<form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+    
+   <div>
+  <label for="hora">Hora</label>
+  <input id="hora" type="time" formControlName="hora" min="09:00" max="23:00" />
+
+  @if (contactForm.controls.hora.touched && contactForm.controls.hora.invalid) {
+    <small>
+      @if (contactForm.controls.hora.hasError('required')) {
+        La hora es obligatoria.
+      } @else if (contactForm.controls.hora.hasError('horaFueraDeRango')) {
+        La hora debe estar entre las 09:00 y las 23:00.
+      }
+    </small>
+  }
+</div> 
+
+  <div>
+    <label for="message">Direccion</label>
+    <textarea id="message" formControlName="message"></textarea>
+
+    @if (contactForm.controls.message.touched && contactForm.controls.message.hasError('required')) {
+      <small>El mensaje es obligatorio.</small>
+    }
+  </div>
+
+  <fieldset>
+  <legend>Método de pago</legend>
+
+  <label>
+    <input type="radio" formControlName="metodoPago" value="tarjeta" /> Tarjeta
+  </label>
+  <label>
+    <input type="radio" formControlName="metodoPago" value="bizum" /> Bizum
+  </label>
+</fieldset>
+
+<div>
+  <label for="tarjeta">Número de tarjeta</label>
+  <input id="tarjeta" type="text" inputmode="numeric" maxlength="16"
+         formControlName="tarjeta" />
+
+  @if (formularioPedido.controls.tarjeta.touched && formularioPedido.controls.tarjeta.invalid) {
+    <small>
+      @if (formularioPedido.controls.tarjeta.hasError('required')) {
+        El número de tarjeta es obligatorio.
+      } @else if (formularioPedido.controls.tarjeta.hasError('pattern')) {
+        La tarjeta debe tener exactamente 16 dígitos numéricos.
+      }
+    </small>
+  }
+</div>
+
+<div>
+  <label for="movil">Móvil (Bizum)</label>
+  <input id="movil" type="text" inputmode="numeric" maxlength="9"
+         formControlName="movil" />
+
+  @if (formularioPedido.controls.movil.touched && formularioPedido.controls.movil.invalid) {
+    <small>
+      @if (formularioPedido.controls.movil.hasError('required')) {
+        El móvil es obligatorio.
+      } @else if (formularioPedido.controls.movil.hasError('pattern')) {
+        El móvil debe tener exactamente 9 dígitos numéricos.
+      }
+    </small>
+  }
+</div>
+
+
+  <button type="submit" [disabled]="contactForm.invalid">Enviar</button>
+</form>
