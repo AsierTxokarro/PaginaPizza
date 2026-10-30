@@ -4,11 +4,11 @@
   <label for="hora">Hora</label>
   <input id="hora" type="time" formControlName="hora" min="09:00" max="23:00" />
 
-  @if (contactForm.controls.hora.touched && contactForm.controls.hora.invalid) {
+  @if (contactForm.controls.horaEntrega.touched && contactForm.controls.horaEntrega.invalid) {
     <small>
-      @if (contactForm.controls.hora.hasError('required')) {
+      @if (contactForm.controls.horaEntrega.hasError('required')) {
         La hora es obligatoria.
-      } @else if (contactForm.controls.hora.hasError('horaFueraDeRango')) {
+      } @else if (contactForm.controls.horaEntrega.hasError('horaFueraDeRango')) {
         La hora debe estar entre las 09:00 y las 23:00.
       }
     </small>
@@ -19,7 +19,7 @@
     <label for="message">Direccion</label>
     <textarea id="message" formControlName="message"></textarea>
 
-    @if (contactForm.controls.message.touched && contactForm.controls.message.hasError('required')) {
+    @if (contactForm.controls.direccion.touched && contactForm.controls.direccion.hasError('required')) {
       <small>El mensaje es obligatorio.</small>
     }
   </div>
@@ -40,11 +40,11 @@
   <input id="tarjeta" type="text" inputmode="numeric" maxlength="16"
          formControlName="tarjeta" />
 
-  @if (formularioPedido.controls.tarjeta.touched && formularioPedido.controls.tarjeta.invalid) {
+  @if (contactForm.controls.tarjeta.touched && contactForm.controls.tarjeta.invalid) {
     <small>
-      @if (formularioPedido.controls.tarjeta.hasError('required')) {
+      @if (contactForm.controls.tarjeta.hasError('required')) {
         El número de tarjeta es obligatorio.
-      } @else if (formularioPedido.controls.tarjeta.hasError('pattern')) {
+      } @else if (contactForm.controls.tarjeta.hasError('pattern')) {
         La tarjeta debe tener exactamente 16 dígitos numéricos.
       }
     </small>
@@ -56,11 +56,11 @@
   <input id="movil" type="text" inputmode="numeric" maxlength="9"
          formControlName="movil" />
 
-  @if (formularioPedido.controls.movil.touched && formularioPedido.controls.movil.invalid) {
+  @if (contactForm.controls.movil.touched && contactForm.controls.movil.invalid) {
     <small>
-      @if (formularioPedido.controls.movil.hasError('required')) {
+      @if (contactForm.controls.movil.hasError('required')) {
         El móvil es obligatorio.
-      } @else if (formularioPedido.controls.movil.hasError('pattern')) {
+      } @else if (contactForm.controls.movil.hasError('pattern')) {
         El móvil debe tener exactamente 9 dígitos numéricos.
       }
     </small>
