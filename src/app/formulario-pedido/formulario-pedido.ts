@@ -55,22 +55,22 @@ export class FormularioPedido {
   });   // <-- aquí termina el FormGroup
 
   FormularioPedido() {
-    this.contactForm.controls.metodoPago.valueChanges
-      .pipe(takeUntilDestroyed())
-      .subscribe((metodo) => {
-        const { tarjeta, movil } = this.contactForm.controls;
+  this.contactForm.controls.metodoPago.valueChanges
+    .pipe(takeUntilDestroyed())
+    .subscribe((metodo) => {
+      const { tarjeta, movil } = this.contactForm.controls;
 
-        if (metodo === 'tarjeta') {
-          tarjeta.enable();
-          movil.disable();
-          movil.reset();
-        } else {
-          movil.enable();
-          tarjeta.disable();
-          tarjeta.reset();
-        }
-      });
-  }
+      if (metodo === 'tarjeta') {
+        tarjeta.enable();
+        movil.disable();
+        movil.reset();
+      } else {
+        movil.enable();
+        tarjeta.disable();
+        tarjeta.reset();
+      }
+    });
+}
 
   onSubmit() {
   if (this.contactForm.invalid) {

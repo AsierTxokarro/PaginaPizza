@@ -2,14 +2,21 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { Pizza } from '../card-pizza/pizza';
 import { Buscador } from '../servicios/buscador';
 import { CardPizza } from '../card-pizza/card-pizza';
+import { Pedido } from '../pedido/pedido';
 
 @Component({
-  imports: [CardPizza],
+  imports: [CardPizza,  Pedido],
   selector: 'app-listado-pizzas',
   styleUrl: './listado-pizzas.css',
   templateUrl: './listado-pizzas.html',
 })
 export class ListadoPizzas {
+
+   acumulado = signal(0);
+
+  onAnadir(cantidad: number): void {
+    this.acumulado.update(total => total + cantidad);
+  }
 
   private buscador = inject(Buscador);
 

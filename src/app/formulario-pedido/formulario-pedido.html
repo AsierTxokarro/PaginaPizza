@@ -1,72 +1,106 @@
+<div class="container my-5" style="max-width: 600px;">
+  <div class="card shadow-lg">
+    <div class="card-body p-4">
+      <h2 class="card-title mb-4 text-center">Haz tu pedido</h2>
 <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-    
-   <div>
-  <label for="hora">Hora</label>
-  <input id="hora" type="time" formControlName="hora" min="09:00" max="23:00" />
 
-  @if (contactForm.controls.horaEntrega.touched && contactForm.controls.horaEntrega.invalid) {
-    <small>
-      @if (contactForm.controls.horaEntrega.hasError('required')) {
-        La hora es obligatoria.
-      } @else if (contactForm.controls.horaEntrega.hasError('horaFueraDeRango')) {
-        La hora debe estar entre las 09:00 y las 23:00.
-      }
-    </small>
-  }
-</div> 
-
-  <div>
-    <label for="message">Direccion</label>
-    <textarea id="message" formControlName="message"></textarea>
-
-    @if (contactForm.controls.direccion.touched && contactForm.controls.direccion.hasError('required')) {
-      <small>El mensaje es obligatorio.</small>
+  <div class="mb-3">
+    <label for="horaEntrega" class="form-label">Hora de entrega</label>
+    <input
+      id="horaEntrega"
+      type="time"
+      class="form-control"
+      formControlName="horaEntrega"
+      min="09:00"
+      max="23:00"
+      [class.is-invalid]="contactForm.controls.horaEntrega.touched && contactForm.controls.horaEntrega.invalid"
+    />
+    @if (contactForm.controls.horaEntrega.touched && contactForm.controls.horaEntrega.invalid) {
+      <div class="invalid-feedback">
+        @if (contactForm.controls.horaEntrega.hasError('required')) {
+          La hora es obligatoria.
+        } @else if (contactForm.controls.horaEntrega.hasError('horaFueraDeRango')) {
+          La hora debe estar entre las 09:00 y las 23:00.
+        }
+      </div>
     }
   </div>
 
-  <fieldset>
-  <legend>Método de pago</legend>
+  <div class="mb-3">
+    <label for="direccion" class="form-label">Dirección</label>
+    <textarea
+      id="direccion"
+      class="form-control"
+      rows="3"
+      formControlName="direccion"
+      [class.is-invalid]="contactForm.controls.direccion.touched && contactForm.controls.direccion.invalid"
+    ></textarea>
+    @if (contactForm.controls.direccion.touched && contactForm.controls.direccion.hasError('required')) {
+      <div class="invalid-feedback">La dirección es obligatoria.</div>
+    }
+  </div>
 
-  <label>
-    <input type="radio" formControlName="metodoPago" value="tarjeta" /> Tarjeta
-  </label>
-  <label>
-    <input type="radio" formControlName="metodoPago" value="bizum" /> Bizum
-  </label>
-</fieldset>
+  <fieldset class="mb-3">
+    <legend class="fs-6">Método de pago</legend>
 
-<div>
-  <label for="tarjeta">Número de tarjeta</label>
-  <input id="tarjeta" type="text" inputmode="numeric" maxlength="16"
-         formControlName="tarjeta" />
+    <div class="form-check">
+      <input class="form-check-input" type="radio" id="pagoTarjeta" formControlName="metodoPago" value="tarjeta" />
+      <label class="form-check-label" for="pagoTarjeta">Tarjeta</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" id="pagoBizum" formControlName="metodoPago" value="bizum" />
+      <label class="form-check-label" for="pagoBizum">Bizum</label>
+    </div>
+  </fieldset>
 
-  @if (contactForm.controls.tarjeta.touched && contactForm.controls.tarjeta.invalid) {
-    <small>
-      @if (contactForm.controls.tarjeta.hasError('required')) {
-        El número de tarjeta es obligatorio.
-      } @else if (contactForm.controls.tarjeta.hasError('pattern')) {
-        La tarjeta debe tener exactamente 16 dígitos numéricos.
+  @if (contactForm.controls.metodoPago.value === 'tarjeta') {
+    <div class="mb-3">
+      <label for="tarjeta" class="form-label">Número de tarjeta</label>
+      <input
+        id="tarjeta"
+        type="text"
+        class="form-control"
+        inputmode="numeric"
+        maxlength="16"
+        formControlName="tarjeta"
+        [class.is-invalid]="contactForm.controls.tarjeta.touched && contactForm.controls.tarjeta.invalid"
+      />
+      @if (contactForm.controls.tarjeta.touched && contactForm.controls.tarjeta.invalid) {
+        <div class="invalid-feedback">
+          @if (contactForm.controls.tarjeta.hasError('required')) {
+            El número de tarjeta es obligatorio.
+          } @else if (contactForm.controls.tarjeta.hasError('pattern')) {
+            La tarjeta debe tener exactamente 16 dígitos numéricos.
+          }
+        </div>
       }
-    </small>
-  }
-</div>
-
-<div>
-  <label for="movil">Móvil (Bizum)</label>
-  <input id="movil" type="text" inputmode="numeric" maxlength="9"
-         formControlName="movil" />
-
-  @if (contactForm.controls.movil.touched && contactForm.controls.movil.invalid) {
-    <small>
-      @if (contactForm.controls.movil.hasError('required')) {
-        El móvil es obligatorio.
-      } @else if (contactForm.controls.movil.hasError('pattern')) {
-        El móvil debe tener exactamente 9 dígitos numéricos.
+    </div>
+  } @else {
+    <div class="mb-3">
+      <label for="movil" class="form-label">Móvil (Bizum)</label>
+      <input
+        id="movil"
+        type="text"
+        class="form-control"
+        inputmode="numeric"
+        maxlength="9"
+        formControlName="movil"
+        [class.is-invalid]="contactForm.controls.movil.touched && contactForm.controls.movil.invalid"
+      />
+      @if (contactForm.controls.movil.touched && contactForm.controls.movil.invalid) {
+        <div class="invalid-feedback">
+          @if (contactForm.controls.movil.hasError('required')) {
+            El móvil es obligatorio.
+          } @else if (contactForm.controls.movil.hasError('pattern')) {
+            El móvil debe tener exactamente 9 dígitos numéricos.
+          }
+        </div>
       }
-    </small>
+    </div>
   }
-</div>
 
-
-  <button type="submit" [disabled]="contactForm.invalid">Enviar</button>
+  <button type="submit" class="btn btn-primary w-100" [disabled]="contactForm.invalid">Enviar</button>
 </form>
+   </div>
+  </div>
+</div>

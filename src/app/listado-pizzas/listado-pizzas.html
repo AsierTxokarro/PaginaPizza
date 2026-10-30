@@ -1,3 +1,10 @@
+<app-pedido [acumulado]="acumulado()"></app-pedido>
+
+<div class="row row-cols-1 row-cols-md-4 g-4 p-4">
+  
 @for (pizza of pizzasFiltradas(); track pizza.id) {
-  <app-card-pizza [pizza]="pizza"></app-card-pizza>
+
+    <app-card-pizza [pizza]="pizza" (anadir)="onAnadir($event)"></app-card-pizza>
+  
 }
+</div>

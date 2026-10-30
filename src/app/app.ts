@@ -7,7 +7,7 @@ import { Pedido } from './pedido/pedido';
 import { Buscador } from './servicios/buscador';
 
 @Component({
-  imports: [RouterOutlet, CardPizza, NavBar, Pedido],
+  imports: [RouterOutlet, CardPizza, NavBar],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
